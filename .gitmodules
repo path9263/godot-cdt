@@ -1,0 +1,7 @@
+[submodule "source/godot-cpp"]
+	path = source/godot-cpp
+	url = https://github.com/godotengine/godot-cpp
+	branch = 4.1
+[submodule "source/CDT"]
+	path = source/CDT
+	url = https://github.com/artem-ogre/CDT
