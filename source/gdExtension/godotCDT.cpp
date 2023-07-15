@@ -4,6 +4,7 @@
 using namespace godot;
 
 void ConstrainedTriangulation::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("getTestVar"), &ConstrainedTriangulation::getTestVar);
 }
 
 ConstrainedTriangulation::ConstrainedTriangulation() {
