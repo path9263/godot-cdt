@@ -15,6 +15,17 @@ run/main_scene="res://cd_tdemo.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/resizable=false
+
 [dotnet]
 
 project/assembly_name="CDT Demo"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.803922, 0.803922, 0.803922, 1)
+anti_aliasing/quality/msaa_2d=3
