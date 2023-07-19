@@ -75,3 +75,24 @@ func _input(event):
 				var b = cdt.get_vertex(indices.y)
 				var c = cdt.get_vertex(indices.z)
 				highlight_tri.polygon = [a,b,c]
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if(hovered_tri_index != -1):
+				var triToRemove: PackedInt32Array = [hovered_tri_index]
+				cdt.remove_triangles(triToRemove)
+				verts = cdt.get_all_vertices()
+				tris = cdt.get_all_triangles()
+				queue_redraw()
+
+
+
+
+
+
+
+
+
+
+
+
+
