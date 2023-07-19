@@ -2,81 +2,89 @@
 
 [ext_resource type="Script" path="res://CDTtest.gd" id="1_niwep"]
 
-[node name="CDTdemo" type="Node2D"]
+[node name="Node" type="Node"]
+
+[node name="highlightTriangle" type="Polygon2D" parent="."]
+z_index = 2
+z_as_relative = false
+color = Color(1, 0.945098, 0.180392, 0.811765)
+antialiased = true
+
+[node name="CDTdemo" type="Node2D" parent="."]
 z_index = 2
 script = ExtResource("1_niwep")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="Polygon2D" type="Polygon2D" parent="CDTdemo"]
 z_as_relative = false
 color = Color(1, 0, 0.156863, 1)
 antialiased = true
 polygon = PackedVector2Array(111, 98, 110, 630, 118, 709, 142, 782, 172, 826, 217, 871, 284, 911, 367, 941, 432, 965, 518, 997, 607, 1017, 779, 1021, 774, 587, 569, 584, 377, 443, 378, 272, 1070, 280, 1071, 590, 1166, 591, 1165, 996, 1771, 999, 1808, 652, 1753, 272, 1459, 277, 1213, 103)
 
-[node name="Hole" type="Polygon2D" parent="."]
+[node name="Hole" type="Polygon2D" parent="CDTdemo"]
 z_as_relative = false
 color = Color(0.270588, 0.321569, 0.431373, 1)
 antialiased = true
 polygon = PackedVector2Array(1614, 436, 1298, 392, 1295, 540, 1411, 552, 1402, 731, 1497, 794, 1596, 658)
 
-[node name="Hole2" type="Polygon2D" parent="."]
+[node name="Hole2" type="Polygon2D" parent="CDTdemo"]
 z_as_relative = false
 color = Color(0.270588, 0.321569, 0.431373, 1)
 antialiased = true
 polygon = PackedVector2Array(610, 193, 682, 375, 807, 375, 807, 190)
 
-[node name="Hole3" type="Polygon2D" parent="."]
+[node name="Hole3" type="Polygon2D" parent="CDTdemo"]
 z_as_relative = false
 color = Color(0.270588, 0.321569, 0.431373, 1)
 antialiased = true
 polygon = PackedVector2Array(886, 871, 935, 927, 863, 979, 1054, 983, 1101, 925, 1053, 866)
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Marker2D" type="Marker2D" parent="CDTdemo"]
 position = Vector2(1662, 356)
 gizmo_extents = 50.0
 
-[node name="Marker2D2" type="Marker2D" parent="."]
+[node name="Marker2D2" type="Marker2D" parent="CDTdemo"]
 position = Vector2(501, 385)
 gizmo_extents = 50.0
 
-[node name="Marker2D3" type="Marker2D" parent="."]
+[node name="Marker2D3" type="Marker2D" parent="CDTdemo"]
 position = Vector2(539, 875)
 gizmo_extents = 50.0
 
-[node name="Marker2D4" type="Marker2D" parent="."]
+[node name="Marker2D4" type="Marker2D" parent="CDTdemo"]
 position = Vector2(1369, 871)
 gizmo_extents = 50.0
 
-[node name="Marker2D5" type="Marker2D" parent="."]
+[node name="Marker2D5" type="Marker2D" parent="CDTdemo"]
 position = Vector2(300, 775)
 gizmo_extents = 50.0
 
-[node name="Marker2D6" type="Marker2D" parent="."]
+[node name="Marker2D6" type="Marker2D" parent="CDTdemo"]
 position = Vector2(1509, 559)
 gizmo_extents = 50.0
 
-[node name="Marker2D7" type="Marker2D" parent="."]
+[node name="Marker2D7" type="Marker2D" parent="CDTdemo"]
 position = Vector2(481, 177)
 gizmo_extents = 50.0
 
-[node name="Marker2D8" type="Marker2D" parent="."]
+[node name="Marker2D8" type="Marker2D" parent="CDTdemo"]
 position = Vector2(171, 987)
 gizmo_extents = 50.0
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="CDTdemo"]
 z_as_relative = false
 points = PackedVector2Array(870, 154, 968, 231, 1180, 188, 1303, 309)
 width = 15.0
 default_color = Color(0.262745, 0.847059, 0.65098, 1)
 joint_mode = 2
 
-[node name="Line2D2" type="Line2D" parent="."]
+[node name="Line2D2" type="Line2D" parent="CDTdemo"]
 z_as_relative = false
 points = PackedVector2Array(469, 679, 643, 763, 992, 784, 1067, 697, 1234, 703)
 width = 15.0
 default_color = Color(0.262745, 0.847059, 0.65098, 1)
 joint_mode = 2
 
-[node name="Line2D3" type="Line2D" parent="."]
+[node name="Line2D3" type="Line2D" parent="CDTdemo"]
 z_as_relative = false
 points = PackedVector2Array(1545, 146, 1819, 149, 1834, 330)
 width = 15.0

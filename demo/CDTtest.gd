@@ -6,11 +6,12 @@ var edges: PackedInt32Array = []
 
 var cdt = ConstrainedTriangulation.new()
 
+var hovered_tri_index = -1
+@onready var highlight_tri = $"../highlightTriangle"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-#	var points: PackedVector2Array = $Polygon2D.polygon
-#	cdt.insert_vertices(points)
 	var edge_count: int = 0
 
 	for c in get_children():  # automatically add any child nodes
@@ -61,3 +62,16 @@ func _draw():
 		#print("Triangles of vert ", v, ": ", cdt.get_vertex_triangles(v)) 
 		draw_circle(vert, 10, Color(0,0,0))
 		draw_circle(vert, 5, Color(1,1,1))
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		var tri = cdt.get_triangle_at_point(event.position)
+		if tri != hovered_tri_index:
+			hovered_tri_index = tri
+			highlight_tri.visible = tri != -1
+			if tri != -1:
+				var indices = cdt.get_triangle(tri)
+				var a = cdt.get_vertex(indices.x)
+				var b = cdt.get_vertex(indices.y)
+				var c = cdt.get_vertex(indices.z)
+				highlight_tri.polygon = [a,b,c]
