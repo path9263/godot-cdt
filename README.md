@@ -14,6 +14,8 @@ This GDExtension is a wrapper for [artem-ogre/CDT](https://github.com/artem-ogre
 ### Demo:
 This github repo contains a demo folder with a Godot project which makes use of many of the features of this extension.  
 
+In the demo you can right click to remove a triangle.  You can also left click twice on two neighboring triangles to flip the shared edge between them.  
+
 ### Basic Use:
 
 - Create a new `ConstrainedTriangulation` Resource.  You may wish to call the `init` function on it before adding data to it as the init function clears all data.  The init function can be used to change the vertex insertion order, determine if overlapping constrained edges should be merged, and set the min distance to merge.  
