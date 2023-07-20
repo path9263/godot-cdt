@@ -3,6 +3,8 @@ Conforming Delaunay triangulations [GDExtension](https://docs.godotengine.org/en
 
 I have not yet added every function of the original library to this extension.  Feel free to make a pull request if you add more!
 
+<img src="cdtDemo.png" alt="CDT example" style='height: 100%; width: 100%; max-height: 250px; object-fit: contain'/>
+
 ## Installing
 To install this library download a [release](https://github.com/path9263/godot-cdt/releases) which works with your version of Godot.  Extract the `bin` folder and place it in the same folder as your `godot.project` file. 
 
