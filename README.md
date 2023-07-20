@@ -21,4 +21,46 @@ This github repo contains a demo folder with a Godot project which makes use of 
     - `cdt.erase_super_triangle()`
     - `cdt.erase_outer_triangles()`
     - `cdt.erase_outer_triangles_and_holes()`
-- You can now access generated vertices and triangles by calling `get_all_vertices()` and `get_all_triangles()`.  The returned array of triangles is a ‎PackedInt32Array‎, every 3 consecutive values represent a triangle.  The values are the indexes of the vertices in the returned vertices array.  
+- You can now access generated vertices and triangles by calling `get_all_vertices()` and `get_all_triangles()`.  The returned array of triangles is a ‎PackedInt32Array‎, every 3 consecutive values represent a triangle.  The values are the indexes of the vertices in the returned vertices array.
+
+```
+extends Node2D
+
+var cdt: ConstrainedTriangulation = ConstrainedTriangulation.new()
+
+var verts: PackedVector2Array = [Vector2(240, 144), Vector2(492, 603), Vector2(763, 546), Vector2(819, 296)]
+var tris: PackedInt32Array
+var edges: PackedInt32Array = [0,1,1,2,2,3,3,0]
+
+func _ready():
+	print($Polygon2D.polygon)
+	cdt.init(true, true, 0.1) 
+
+	var edge_count: int = 0
+
+	# always insert all vertices before any constrained edges
+	cdt.insert_vertices(verts)
+
+	# use one of the two methods below: 
+	cdt.insert_edges(edges)
+	#cdt.insert_conforming_edges(edges)
+
+	# do one of the three below options to generate triangles: 
+	#cdt.erase_super_triangle()
+	#cdt.erase_outer_triangles()
+	cdt.erase_outer_triangles_and_holes()
+
+	verts = cdt.get_all_vertices()
+	tris = cdt.get_all_triangles()
+
+func _draw():
+	for tri in tris.size() / 3:
+		for i in 3:
+			var from = verts[tris[3*tri + i]]
+			var to = verts[tris[3*tri + (i+1)%3]]
+			draw_line(from, to, Color(0.07, 0.47, 0.85), 1.0, true )
+	for v in verts.size():
+		var vert = verts[v]
+		draw_circle(vert, 10, Color(0,0,0))
+		draw_circle(vert, 5, Color(1,1,1))
+```
