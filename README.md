@@ -1,5 +1,5 @@
 # Godot-CDT
-Conforming Delaunay triangulations [GDExtension](https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/what_is_gdextension.html) for Godot 4.  This is a wrapper for [artem-ogre/CDT](https://github.com/artem-ogre/CDT) C++ library.  Inspired by [cdt-gd](https://github.com/sheepandshepherd/cdt-gd) which works with Godot 3. 
+Conforming/Constrained Delaunay triangulations [GDExtension](https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/what_is_gdextension.html) for Godot 4.  This is a wrapper for [artem-ogre/CDT](https://github.com/artem-ogre/CDT) C++ library.  Inspired by [cdt-gd](https://github.com/sheepandshepherd/cdt-gd) which works with Godot 3. 
 
 I have not yet added every function of the original library to this extension.  Feel free to make a pull request if you add more!
 
