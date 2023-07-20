@@ -35,7 +35,6 @@ var tris: PackedInt32Array
 var edges: PackedInt32Array = [0,1,1,2,2,3,3,0]
 
 func _ready():
-	print($Polygon2D.polygon)
 	cdt.init(true, true, 0.1) 
 
 	var edge_count: int = 0
