@@ -31,6 +31,7 @@ void ConstrainedTriangulation::_bind_methods() {
 
 ConstrainedTriangulation::ConstrainedTriangulation() {
     // Initialize any variables here.
+    // _err_print_error("", "", 0, "this is a test warning", true, true);
 }
 
 ConstrainedTriangulation::~ConstrainedTriangulation() {

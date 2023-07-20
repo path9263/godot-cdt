@@ -6,8 +6,11 @@ var edges: PackedInt32Array = []
 
 var cdt = ConstrainedTriangulation.new()
 
-var hovered_tri_index = -1
+var hovered_tri_index: int = -1
 @onready var highlight_tri = $"../highlightTriangle"
+
+var tris_to_flip: Vector2i = Vector2i(-1,-1)
+var tri_neighbors: Vector3i
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -76,13 +79,37 @@ func _input(event):
 				var c = cdt.get_vertex(indices.z)
 				highlight_tri.polygon = [a,b,c]
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if(hovered_tri_index != -1):
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			if hovered_tri_index != -1:
 				var triToRemove: PackedInt32Array = [hovered_tri_index]
 				cdt.remove_triangles(triToRemove)
 				verts = cdt.get_all_vertices()
 				tris = cdt.get_all_triangles()
 				queue_redraw()
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if hovered_tri_index != -1:
+				if tris_to_flip.x == -1:
+					tris_to_flip.x = hovered_tri_index
+					tri_neighbors = cdt.get_triangle_neighbors(tris_to_flip.x)
+				else:
+					var isNeighbor = false
+					for i in [tri_neighbors.x,tri_neighbors.y,tri_neighbors.z]:
+						if i == hovered_tri_index:
+							isNeighbor = true
+					if isNeighbor:
+						tris_to_flip.y = hovered_tri_index
+						cdt.flip_edge(tris_to_flip.x, tris_to_flip.y)
+						tris_to_flip.x = -1
+						tris_to_flip.y = -1
+						verts = cdt.get_all_vertices()
+						tris = cdt.get_all_triangles()
+						queue_redraw()
+					else:
+						tris_to_flip.x = hovered_tri_index
+						tri_neighbors = cdt.get_triangle_neighbors(tris_to_flip.x)
+				print(tri_neighbors)
+				print(tris_to_flip)
+
 
 
 
