@@ -7,7 +7,8 @@ using Edge = CDT::Edge;
 using namespace godot;
 
 void ConstrainedTriangulation::_bind_methods() {
-    //ClassDB::bind_method(D_METHOD("getTestVar"), &ConstrainedTriangulation::getTestVar);
+
+    ClassDB::bind_method(D_METHOD("init", "optomizeInsertOrder", "resolveConstrainedEdges", "minDistToConstraintEdge"), &ConstrainedTriangulation::init);
     ClassDB::bind_method(D_METHOD("insert_vertices", "vertices"), &ConstrainedTriangulation::insert_vertices);
     ClassDB::bind_method(D_METHOD("insert_edges", "edges"), &ConstrainedTriangulation::insert_edges);
     ClassDB::bind_method(D_METHOD("insert_conforming_edges", "edges"), &ConstrainedTriangulation::insert_conforming_edges);
@@ -26,17 +27,30 @@ void ConstrainedTriangulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("flip_edge", "firstTri", "secondTri"), &ConstrainedTriangulation::flip_edge);
     ClassDB::bind_method(D_METHOD("remove_triangles", "triangles"), &ConstrainedTriangulation::remove_triangles);
 
-
 }
 
 ConstrainedTriangulation::ConstrainedTriangulation() {
     // Initialize any variables here.
     // _err_print_error("", "", 0, "this is a test warning", true, true);
+
 }
 
 ConstrainedTriangulation::~ConstrainedTriangulation() {
     // Add your cleanup here.
 }
+
+void ConstrainedTriangulation::init(bool optomizeInsertOrder, bool resolveConstrainedEdges, float minDistToConstraintEdge){
+
+    CDT::VertexInsertionOrder::Enum order;
+    CDT::IntersectingConstraintEdges::Enum resolve;
+
+    order = (optomizeInsertOrder) ? CDT::VertexInsertionOrder::Auto : CDT::VertexInsertionOrder::AsProvided;
+
+    resolve = (resolveConstrainedEdges) ? CDT::IntersectingConstraintEdges::Resolve : CDT::IntersectingConstraintEdges::Ignore;
+
+    triangulation = Triangulation(order, resolve, minDistToConstraintEdge);
+}
+
 
 void ConstrainedTriangulation::insert_vertices(PackedVector2Array vertices){
     std::vector<Point> vertsToInsert;

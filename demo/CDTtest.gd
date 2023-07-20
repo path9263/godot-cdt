@@ -4,7 +4,7 @@ var verts: PackedVector2Array
 var tris: PackedInt32Array
 var edges: PackedInt32Array = []
 
-var cdt = ConstrainedTriangulation.new()
+var cdt: ConstrainedTriangulation = ConstrainedTriangulation.new()
 
 var hovered_tri_index: int = -1
 @onready var highlight_tri = $"../highlightTriangle"
@@ -14,6 +14,8 @@ var tri_neighbors: Vector3i
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	cdt.init(true, true, 0.1)
 	
 	var edge_count: int = 0
 
@@ -62,7 +64,6 @@ func _draw():
 			draw_line(from, to, Color(0.07, 0.47, 0.85), 1.0, true )
 	for v in verts.size():
 		var vert = verts[v]
-		#print("Triangles of vert ", v, ": ", cdt.get_vertex_triangles(v)) 
 		draw_circle(vert, 10, Color(0,0,0))
 		draw_circle(vert, 5, Color(1,1,1))
 
@@ -107,8 +108,7 @@ func _input(event):
 					else:
 						tris_to_flip.x = hovered_tri_index
 						tri_neighbors = cdt.get_triangle_neighbors(tris_to_flip.x)
-				print(tri_neighbors)
-				print(tris_to_flip)
+
 
 
 

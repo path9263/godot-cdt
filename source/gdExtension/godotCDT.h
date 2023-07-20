@@ -25,6 +25,11 @@ public:
     ConstrainedTriangulation();
     ~ConstrainedTriangulation();
 
+    // enum testEnum {AAA, BBB};  // note to self: how to do Enums: https://godotforums.org/d/22886-is-there-a-way-to-expose-c-enums-into-gdscript-or-more-precisely-how-is-it-done-in-the-engine/4  this does work! 
+
+    /* Call once before anything else, calling again will erase triangle data */
+    void init(bool optomizeInsertOrder, bool resolveConstrainedEdges, float minDistToConstraintEdge);
+
     void insert_vertices(PackedVector2Array vertices);
     void insert_edges(PackedInt32Array edges);
     void insert_conforming_edges(PackedInt32Array edges);
