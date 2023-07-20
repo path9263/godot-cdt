@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl13ki08x5mtw"]
+[gd_scene load_steps=3 format=3 uid="uid://dl13ki08x5mtw"]
 
 [ext_resource type="Script" path="res://CDTtest.gd" id="1_niwep"]
+
+[sub_resource type="Curve2D" id="Curve2D_vr34l"]
+bake_interval = 10.0
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 298, 178, 1.95413, -77.903, -1.95413, 77.903, 189, 281, 15.9288, -115.559, -15.9288, 115.559, 318, 604)
+}
+point_count = 3
 
 [node name="Node" type="Node"]
 
@@ -18,7 +25,7 @@ script = ExtResource("1_niwep")
 z_as_relative = false
 color = Color(1, 0, 0.156863, 1)
 antialiased = true
-polygon = PackedVector2Array(111, 98, 110, 630, 118, 709, 142, 782, 172, 826, 217, 871, 284, 911, 367, 941, 432, 965, 518, 997, 607, 1017, 779, 1021, 774, 587, 569, 584, 377, 443, 378, 272, 1070, 280, 1071, 590, 1166, 591, 1165, 996, 1771, 999, 1808, 652, 1753, 272, 1459, 277, 1213, 103)
+polygon = PackedVector2Array(111, 98, 110.817, 195.215, 110.404, 415.213, 110, 630, 118, 709, 142, 782, 172, 826, 217, 871, 284, 911, 367, 941, 432, 965, 518, 997, 607, 1017, 779, 1021, 774, 587, 569, 584, 377, 443, 378, 272, 1070, 280, 1071, 590, 1166, 591, 1165, 996, 1771, 999, 1808, 652, 1753, 272, 1459, 277, 1213, 103)
 
 [node name="Hole" type="Polygon2D" parent="CDTdemo"]
 z_as_relative = false
@@ -70,6 +77,10 @@ gizmo_extents = 50.0
 position = Vector2(171, 987)
 gizmo_extents = 50.0
 
+[node name="Marker2D9" type="Marker2D" parent="CDTdemo"]
+position = Vector2(274, 297)
+gizmo_extents = 50.0
+
 [node name="Line2D" type="Line2D" parent="CDTdemo"]
 z_as_relative = false
 points = PackedVector2Array(870, 154, 968, 231, 1180, 188, 1303, 309)
@@ -90,3 +101,8 @@ points = PackedVector2Array(1545, 146, 1819, 149, 1834, 330)
 width = 15.0
 default_color = Color(0.262745, 0.847059, 0.65098, 1)
 joint_mode = 2
+
+[node name="Path2D" type="Path2D" parent="CDTdemo"]
+z_as_relative = false
+position = Vector2(11, 15)
+curve = SubResource("Curve2D_vr34l")
