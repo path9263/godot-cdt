@@ -9,7 +9,7 @@ I have not yet added every function of the original library to this extension.  
 To install this library download a [release](https://github.com/path9263/godot-cdt/releases) which works with your version of Godot.  Extract the `bin` folder and place it in the same folder as your `godot.project` file. 
 
 ## Using this Extension
-This gdExtension is a wrapper for [artem-ogre/CDT](https://github.com/artem-ogre/CDT) C++ library, refer to the documentation there for more detail.
+This GDExtension is a wrapper for [artem-ogre/CDT](https://github.com/artem-ogre/CDT) C++ library, refer to the documentation there for more detail.
 
 ### Demo:
 This github repo contains a demo folder with a Godot project which makes use of many of the features of this extension.  
@@ -65,3 +65,5 @@ func _draw():
 		draw_circle(vert, 10, Color(0,0,0))
 		draw_circle(vert, 5, Color(1,1,1))
 ```
+## Building the  Extension 
+This GDExtension more or less follows [this guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_cpp_example.html#doc-gdextension-cpp-example).  Some files are located in different directories. 
