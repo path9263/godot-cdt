@@ -2,6 +2,7 @@ extends Node2D
 
 var verts: PackedVector2Array
 var tris: PackedInt32Array
+var halfedges: PackedInt32Array
 var edges: PackedInt32Array = []
 
 var cdt: ConstrainedTriangulation = ConstrainedTriangulation.new()
@@ -53,12 +54,20 @@ func _ready():
 	#cdt.insert_conforming_edges(edges)
 	
 	# do one of the three below options to generate triangles: 
-	#cdt.erase_super_triangle()
+	cdt.erase_super_triangle()
 	#cdt.erase_outer_triangles()
-	cdt.erase_outer_triangles_and_holes()
+	#cdt.erase_outer_triangles_and_holes()
 	
 	verts = cdt.get_all_vertices()
 	tris = cdt.get_all_triangles()
+	halfedges = cdt.get_all_halfedges()
+	
+
+	print(verts)
+	print(halfedges)
+	print(tris)
+	
+	
 	
 
 func _draw():
@@ -66,7 +75,14 @@ func _draw():
 		for i in 3:
 			var from = verts[tris[3*tri + i]]
 			var to = verts[tris[3*tri + (i+1)%3]]
-			draw_line(from, to, Color(0.07, 0.47, 0.85), 1.0, true )
+			draw_line(from, to, Color(0, 0.00011555384845, 0.68359375), 2.8, true )
+	
+	for e in halfedges.size():
+		if halfedges[e] != -1:
+			var from = verts[halfedges[e]]
+			var to = verts[tris[e]]
+			draw_line(from, to, Color(0.08, 0.46, 0.07), 3.0, true )
+			
 	for v in verts.size():
 		var vert = verts[v]
 		draw_circle(vert, 10, Color(0,0,0))
@@ -112,6 +128,7 @@ func _input(event):
 						tris_to_flip.y = -1
 						verts = cdt.get_all_vertices()
 						tris = cdt.get_all_triangles()
+						halfedges = cdt.get_all_halfedges()
 						queue_redraw()
 					else: # was not a neighbor so set as first triangle
 						tris_to_flip.x = hovered_tri_index

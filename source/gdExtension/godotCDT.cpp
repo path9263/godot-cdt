@@ -18,6 +18,7 @@ void ConstrainedTriangulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_vertex_count"), &ConstrainedTriangulation::get_vertex_count);
     ClassDB::bind_method(D_METHOD("get_all_vertices"), &ConstrainedTriangulation::get_all_vertices);
     ClassDB::bind_method(D_METHOD("get_all_triangles"), &ConstrainedTriangulation::get_all_triangles);
+    ClassDB::bind_method(D_METHOD("get_all_halfedges"), &ConstrainedTriangulation::get_all_halfedges);
     ClassDB::bind_method(D_METHOD("get_vertex", "vertIndex"), &ConstrainedTriangulation::get_vertex);
     ClassDB::bind_method(D_METHOD("get_triangle", "triIndex"), &ConstrainedTriangulation::get_triangle);
     ClassDB::bind_method(D_METHOD("get_triangle_neighbors", "triIndex"), &ConstrainedTriangulation::get_triangle_neighbors);
@@ -123,6 +124,23 @@ PackedInt32Array ConstrainedTriangulation::get_all_triangles(){ // TODO should t
 		allTris[3*i+2] = triangulation.triangles[i].vertices[2];
     }
     return allTris;
+}
+
+PackedInt32Array ConstrainedTriangulation::get_all_halfedges(){ 
+    PackedInt32Array allHalfedges; 
+    int trisCount = triangulation.triangles.size();     
+    allHalfedges.resize(trisCount*3);
+    for(int t = 0; t < trisCount; ++t){
+        for(int s = 0; s < 3; ++s){
+            std::pair next = triangulation.triangles[t].next(triangulation.triangles[t].vertices[s]);
+            if( next.first != -1){ // TriInd 
+                allHalfedges[(3*t)+s] = next.second; // VertInd
+            } else {
+                allHalfedges[(3*t)+s] = -1;
+            }
+        }
+    }
+    return allHalfedges;
 }
 
 Vector2 ConstrainedTriangulation::get_vertex(int vertIndex){
