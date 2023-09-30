@@ -4,6 +4,7 @@ var verts: PackedVector2Array
 var tris: PackedInt32Array
 var halfedges: PackedInt32Array
 var edges: PackedInt32Array = []
+var pointEdges: Array
 
 var cdt: ConstrainedTriangulation = ConstrainedTriangulation.new()
 
@@ -61,27 +62,56 @@ func _ready():
 	verts = cdt.get_all_vertices()
 	tris = cdt.get_all_triangles()
 	halfedges = cdt.get_all_halfedges()
+	pointEdges = cdt.get_all_point_edges()
 	
-
+	print("verts, halfedges, tris, pointEdges, edges")
 	print(verts)
 	print(halfedges)
 	print(tris)
+	print(pointEdges)
 	
+
+
+func nextHalfedge(e): # will return another point even if there is no neighbor triangle! 
+	#  to use:  verts[tris[nextHalfedge(triIndex)]]
+	return e - 2 if (e % 3 == 2) else e + 1
 	
-	
+func prevHalfedge(e):
+	return e + 2 if (e % 3 == 0) else e - 1
 
 func _draw():
 	for tri in tris.size() / 3:
 		for i in 3:
 			var from = verts[tris[3*tri + i]]
 			var to = verts[tris[3*tri + (i+1)%3]]
-			draw_line(from, to, Color(0, 0.00011555384845, 0.68359375), 2.8, true )
-	
-	for e in halfedges.size():
-		if halfedges[e] != -1:
-			var from = verts[halfedges[e]]
-			var to = verts[tris[e]]
-			draw_line(from, to, Color(0.08, 0.46, 0.07), 3.0, true )
+			draw_line(from, to, Color(0.99, 0.0, 0.0), 2.8, true )
+##
+#	for e in halfedges.size():
+#		if halfedges[e] != -1:
+#			if e > halfedges[e]:
+#				var from = verts[halfedges[e]]
+#				var to = verts[tris[e]]
+#				draw_line(from, to, Color(0.95703125, 0, 0.12767934799194, 0.3), 7.0, true )
+
+	# draw each edge between tris only once:
+	var edges: Array = []
+	var tests: Array = []
+	var from
+	var to
+	for start in halfedges.size():
+		if tris[start] > halfedges[start]: # only draw each edge once, 
+			if halfedges[start] != -1:
+				from = tris[start]
+				to = halfedges[start]
+			else: # this edge is an outer boundary so it has no halfedge
+				from = tris[start]
+				to = tris[nextHalfedge(start)] # get other point of edge from own triangle since there is no triangle neighbor 
+			draw_line(verts[from], verts[to], Color(0.00, 0.99, 0.00, 0.5), 3.0, true )
+			edges.append([to, from])
+			
+	print(edges)
+	print(tests)
+	print(edges.size())
 			
 	for v in verts.size():
 		var vert = verts[v]

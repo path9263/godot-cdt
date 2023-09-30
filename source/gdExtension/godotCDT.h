@@ -44,6 +44,7 @@ public:
     PackedInt32Array get_all_triangles();
     /* Halfedge will be -1 if there is no halfedge */
     PackedInt32Array get_all_halfedges();
+    Array get_all_point_edges();
 
     Vector2 get_vertex(int vertIndex);
     Vector3i get_triangle(int triIndex);

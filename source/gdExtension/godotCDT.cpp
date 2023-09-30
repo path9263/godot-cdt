@@ -19,6 +19,7 @@ void ConstrainedTriangulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_all_vertices"), &ConstrainedTriangulation::get_all_vertices);
     ClassDB::bind_method(D_METHOD("get_all_triangles"), &ConstrainedTriangulation::get_all_triangles);
     ClassDB::bind_method(D_METHOD("get_all_halfedges"), &ConstrainedTriangulation::get_all_halfedges);
+    ClassDB::bind_method(D_METHOD("get_all_point_edges"), &ConstrainedTriangulation::get_all_point_edges);  
     ClassDB::bind_method(D_METHOD("get_vertex", "vertIndex"), &ConstrainedTriangulation::get_vertex);
     ClassDB::bind_method(D_METHOD("get_triangle", "triIndex"), &ConstrainedTriangulation::get_triangle);
     ClassDB::bind_method(D_METHOD("get_triangle_neighbors", "triIndex"), &ConstrainedTriangulation::get_triangle_neighbors);
@@ -141,6 +142,22 @@ PackedInt32Array ConstrainedTriangulation::get_all_halfedges(){
         }
     }
     return allHalfedges;
+}
+
+Array ConstrainedTriangulation::get_all_point_edges(){
+    std::vector< godot::Array > pointsVec;  // using std::vector because we couldn't get godot array to work.
+    pointsVec.resize(triangulation.vertices.size());
+
+    for(int t = 0; t < triangulation.triangles.size(); ++t){
+        for(int s = 0; s < 3; ++s){ 
+            pointsVec[triangulation.triangles[t].vertices[s]].push_back((t*3) + s);
+        }
+    }
+    godot::Array pointsArray{};  // this is a Godot Engine array
+    for(int t = 0; t < triangulation.vertices.size(); ++t){
+        pointsArray.push_back(pointsVec[t]);
+    }
+    return pointsArray;
 }
 
 Vector2 ConstrainedTriangulation::get_vertex(int vertIndex){
