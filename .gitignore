@@ -13,3 +13,19 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Visual Studio Code project files
+.vscode
+
+# Binaries
+*.o
+*.os
+*.so
+*.obj
+*.bc
+*.pyc
+*.dblite
+*.pdb
+*.lib
+*.exp
+*.dll

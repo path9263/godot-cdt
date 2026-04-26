@@ -68,4 +68,4 @@ func _draw():
 		draw_circle(vert, 5, Color(1,1,1))
 ```
 ## Building the  Extension 
-This GDExtension more or less follows [this guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_cpp_example.html#doc-gdextension-cpp-example).  Some files are located in different directories. 
+This GDExtension more or less follows [this guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_c_example.html#gdextension-c-example).  Some files are located in different directories. 

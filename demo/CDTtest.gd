@@ -133,18 +133,3 @@ func _input(event):
 					else: # was not a neighbor so set as first triangle
 						tris_to_flip.x = hovered_tri_index
 						tri_neighbors = cdt.get_triangle_neighbors(tris_to_flip.x)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

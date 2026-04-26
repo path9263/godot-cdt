@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dl13ki08x5mtw"]
 
-[ext_resource type="Script" path="res://CDTtest.gd" id="1_niwep"]
+[ext_resource type="Script" uid="uid://dyhuusu6y8bj4" path="res://CDTtest.gd" id="1_niwep"]
 
 [sub_resource type="Curve2D" id="Curve2D_vr34l"]
 bake_interval = 10.0
